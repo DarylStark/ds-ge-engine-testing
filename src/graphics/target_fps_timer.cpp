@@ -33,7 +33,9 @@ namespace ds::graphics
                 _frame_end_time - _frame_start_time);
         delay();
 
+#ifndef NDEBUG
         print_frame_time();
+#endif
     }
 
     void TargetFPSTimer::delay()
