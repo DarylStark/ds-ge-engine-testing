@@ -1,6 +1,3 @@
-#include <iostream>
-#include <thread>
-
 #include "target_fps_timer.h"
 
 int main()
@@ -10,9 +7,6 @@ int main()
     while (true)
     {
         timer.start();
-
-        // Process the frame
-        std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
         timer.stop();
     }
