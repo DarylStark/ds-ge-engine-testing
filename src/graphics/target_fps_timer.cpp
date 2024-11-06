@@ -7,8 +7,11 @@ namespace ds::graphics
     TargetFPSTimer::TargetFPSTimer(const uint32_t target_fps)
         : _target_fps(target_fps)
     {
-        _target_frame_duration =
-            std::chrono::microseconds(1000000 / _target_fps);
+        _target_frame_duration = std::chrono::microseconds(0);
+
+        if (_target_fps)
+            _target_frame_duration =
+                std::chrono::microseconds(1000000 / _target_fps);
     }
 
     void TargetFPSTimer::start()
@@ -33,13 +36,15 @@ namespace ds::graphics
 
         // Calculate the delay time
         _delay_time = _target_frame_duration - _frame_processing_time;
-        auto local_delay_time = _delay_time;
+        std::chrono::microseconds local_delay_time = _delay_time;
 
         if (_delay_time.count() > 0)
         {
             if (local_delay_time.count() >
                 1000)  // Sleep only if delay time is significant
             {
+                const auto sleeptime =
+                    local_delay_time - std::chrono::microseconds(1000);
                 std::this_thread::sleep_for(local_delay_time -
                                             std::chrono::microseconds(1000));
                 local_delay_time = std::chrono::microseconds(
@@ -59,22 +64,32 @@ namespace ds::graphics
 
     void TargetFPSTimer::print_frame_time() const
     {
-        const auto total_frame_time =
+        uint64_t processing_time =
             std::chrono::duration_cast<std::chrono::microseconds>(
-                _frame_processing_time + _delay_time);
-        const auto theoretical_fps = 1000000 / total_frame_time.count();
+                _frame_processing_time)
+                .count();
+        int64_t delay_time =
+            std::chrono::duration_cast<std::chrono::microseconds>(_delay_time)
+                .count();
+        if (delay_time < 0) delay_time = 0;
 
-        std::cout << "Processing time: "
-                  << std::chrono::duration_cast<std::chrono::microseconds>(
-                         _frame_processing_time)
-                         .count()
-                  << "us."
-                  << " Delay time: "
-                  << std::chrono::duration_cast<std::chrono::microseconds>(
-                         _delay_time)
-                         .count()
-                  << "ms."
-                  << " Total: " << total_frame_time.count() << " ms."
-                  << " Theoretical FPS: " << theoretical_fps << std::endl;
+        uint64_t total_frame_time =
+            std::chrono::duration_cast<std::chrono::microseconds>(
+                _frame_processing_time)
+                .count() +
+            delay_time;
+
+        if (total_frame_time == 0) total_frame_time = 1;
+        uint64_t theoretical_fps = 1000000 / total_frame_time;
+
+        std::cout << "Processing time: " << processing_time << "us."
+                  << " Delay time: " << delay_time << "us."
+                  << " Total: " << total_frame_time << "us."
+                  << " Theoretical FPS: " << theoretical_fps;
+        if (theoretical_fps < _target_fps)
+        {
+            std::cout << " (FPS capped)";
+        }
+        std::cout << '\n';
     }
 }  // namespace ds::graphics
