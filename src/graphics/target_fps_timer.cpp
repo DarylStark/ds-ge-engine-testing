@@ -52,10 +52,10 @@ namespace ds::graphics
             }
 
             // Busy-wait for the remaining time to achieve higher precision
-            auto busy_wait_start = high_resolution_clock::now();
+            auto busy_wait_start = std::chrono::high_resolution_clock::now();
             while (std::chrono::duration_cast<std::chrono::microseconds>(
-                       high_resolution_clock::now() - busy_wait_start) <
-                   local_delay_time)
+                       std::chrono::high_resolution_clock::now() -
+                       busy_wait_start) < local_delay_time)
             {
                 // Busy-wait loop
             }
