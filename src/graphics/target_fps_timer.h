@@ -21,7 +21,7 @@ namespace ds::graphics
         ~TargetFPSTimer();
         void start();
         void stop();
-        void delay();
+        virtual void delay();
         void print_frame_time() const;
     };
 }  // namespace ds::graphics
