@@ -12,6 +12,12 @@ namespace ds::graphics
         if (_target_fps)
             _target_frame_duration =
                 std::chrono::microseconds(1000000 / _target_fps);
+        start();
+    }
+
+    TargetFPSTimer::~TargetFPSTimer()
+    {
+        stop();
     }
 
     void TargetFPSTimer::start()

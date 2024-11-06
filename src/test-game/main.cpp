@@ -1,14 +1,14 @@
+#include <thread>
+
 #include "target_fps_timer.h"
 
 int main()
 {
-    ds::graphics::TargetFPSTimer timer(1000);
-
     while (true)
     {
-        timer.start();
+        ds::graphics::TargetFPSTimer timer(60);
 
-        timer.stop();
+        std::this_thread::sleep_for(std::chrono::microseconds(50));
     }
 
     return 0;

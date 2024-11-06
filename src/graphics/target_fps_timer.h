@@ -18,6 +18,7 @@ namespace ds::graphics
 
     public:
         TargetFPSTimer(const uint32_t target_fps);
+        ~TargetFPSTimer();
         void start();
         void stop();
         void delay();
