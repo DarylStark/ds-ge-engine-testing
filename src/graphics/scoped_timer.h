@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace ds::graphics
+namespace ds::utilities
 {
     class ScopedTimer
     {
@@ -16,12 +16,12 @@ namespace ds::graphics
         ScopedTimer();
         ~ScopedTimer();
     };
-}  // namespace ds::graphics
+}  // namespace ds::utilities
 
 // A MACRO that can be used to create a ScopedTimer object and print the
 // duration and FPS of the scope. Only available in DEBUG mode.
 #ifndef NDEBUG
-#define DS_GRAPHICS_SCOPED_TIMER ds::graphics::ScopedTimer scoped_timer
+#define DS_GRAPHICS_SCOPED_TIMER ds::utilities::ScopedTimer scoped_timer
 #else
 #define DS_GRAPHICS_SCOPED_TIMER
 #endif

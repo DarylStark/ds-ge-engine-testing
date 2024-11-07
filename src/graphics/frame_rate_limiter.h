@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace ds::graphics
+namespace ds::utilities
 {
     class FrameRateLimiter
     {
@@ -23,4 +23,4 @@ namespace ds::graphics
         void stop();
         virtual void delay();
     };
-}  // namespace ds::graphics
+}  // namespace ds::utilities

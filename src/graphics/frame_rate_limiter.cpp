@@ -3,7 +3,7 @@
 #include <iostream>
 #include <thread>
 
-namespace ds::graphics
+namespace ds::utilities
 {
     FrameRateLimiter::FrameRateLimiter(const uint32_t target_fps)
         : _target_fps(target_fps)
@@ -66,4 +66,4 @@ namespace ds::graphics
             }
         }
     }
-}  // namespace ds::graphics
+}  // namespace ds::utilities

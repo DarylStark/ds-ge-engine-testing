@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
-namespace ds::graphics
+namespace ds::utilities
 {
     ScopedTimer::ScopedTimer()
     {
@@ -27,4 +27,4 @@ namespace ds::graphics
                   << " FPS";
         std::cout << '\n';
     }
-}  // namespace ds::graphics
+}  // namespace ds::utilities
