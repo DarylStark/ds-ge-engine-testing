@@ -21,7 +21,7 @@ namespace ds::utilities
         double fps = -1;
         if (frame_duration > 0) fps = 1000000. / frame_duration;
 
-        std::cout << "Duration: " << std::setw(9) << std::setfill(' ')
+        std::cout << "Duration: " << std::setw(9) << std::setfill('.')
                   << frame_duration << "us >> ";
         std::cout << "FPS: " << std::fixed << std::setprecision(4) << fps
                   << " FPS";

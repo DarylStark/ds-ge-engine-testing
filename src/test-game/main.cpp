@@ -7,10 +7,8 @@ int main()
 {
     while (true)
     {
-        DS_GRAPHICS_SCOPED_TIMER;
-        ds::utilities::FrameRateLimiter limiter(60);
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(15));
+        ds::utilities::ScopedTimer timer;
+        ds::utilities::FrameRateLimiter limiter(121);
     }
 
     return 0;

@@ -17,11 +17,3 @@ namespace ds::utilities
         ~ScopedTimer();
     };
 }  // namespace ds::utilities
-
-// A MACRO that can be used to create a ScopedTimer object and print the
-// duration and FPS of the scope. Only available in DEBUG mode.
-#ifndef NDEBUG
-#define DS_GRAPHICS_SCOPED_TIMER ds::utilities::ScopedTimer scoped_timer
-#else
-#define DS_GRAPHICS_SCOPED_TIMER
-#endif
