@@ -4,7 +4,7 @@
 
 namespace ds::graphics
 {
-    class TargetFPSTimer
+    class FrameRateLimiter
     {
     private:
         uint32_t _target_fps;
@@ -17,8 +17,8 @@ namespace ds::graphics
         std::chrono::microseconds _delay_time;
 
     public:
-        TargetFPSTimer(const uint32_t target_fps);
-        ~TargetFPSTimer();
+        FrameRateLimiter(const uint32_t target_fps);
+        ~FrameRateLimiter();
         void start();
         void stop();
         virtual void delay();

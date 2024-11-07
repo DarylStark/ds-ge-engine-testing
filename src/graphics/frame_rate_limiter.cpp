@@ -1,10 +1,11 @@
-#include "target_fps_timer.h"
+#include "frame_rate_limiter.h"
 
 #include <iostream>
 #include <thread>
+
 namespace ds::graphics
 {
-    TargetFPSTimer::TargetFPSTimer(const uint32_t target_fps)
+    FrameRateLimiter::FrameRateLimiter(const uint32_t target_fps)
         : _target_fps(target_fps)
     {
         _target_frame_duration = std::chrono::microseconds(0);
@@ -15,17 +16,17 @@ namespace ds::graphics
         start();
     }
 
-    TargetFPSTimer::~TargetFPSTimer()
+    FrameRateLimiter::~FrameRateLimiter()
     {
         stop();
     }
 
-    void TargetFPSTimer::start()
+    void FrameRateLimiter::start()
     {
         _frame_start_time = std::chrono::high_resolution_clock::now();
     }
 
-    void TargetFPSTimer::stop()
+    void FrameRateLimiter::stop()
     {
         _frame_end_time = std::chrono::high_resolution_clock::now();
         _frame_processing_time =
@@ -38,7 +39,7 @@ namespace ds::graphics
 #endif
     }
 
-    void TargetFPSTimer::delay()
+    void FrameRateLimiter::delay()
     {
         if (_target_fps == 0) return;
 
@@ -70,7 +71,7 @@ namespace ds::graphics
         }
     }
 
-    void TargetFPSTimer::print_frame_time() const
+    void FrameRateLimiter::print_frame_time() const
     {
         uint64_t processing_time =
             std::chrono::duration_cast<std::chrono::microseconds>(
