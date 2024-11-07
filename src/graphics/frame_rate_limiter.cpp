@@ -33,10 +33,6 @@ namespace ds::graphics
             std::chrono::duration_cast<std::chrono::microseconds>(
                 _frame_end_time - _frame_start_time);
         delay();
-
-#ifndef NDEBUG
-        print_frame_time();
-#endif
     }
 
     void FrameRateLimiter::delay()
@@ -69,36 +65,5 @@ namespace ds::graphics
                 // Busy-wait loop
             }
         }
-    }
-
-    void FrameRateLimiter::print_frame_time() const
-    {
-        uint64_t processing_time =
-            std::chrono::duration_cast<std::chrono::microseconds>(
-                _frame_processing_time)
-                .count();
-        int64_t delay_time =
-            std::chrono::duration_cast<std::chrono::microseconds>(_delay_time)
-                .count();
-        if (delay_time < 0) delay_time = 0;
-
-        uint64_t total_frame_time =
-            std::chrono::duration_cast<std::chrono::microseconds>(
-                _frame_processing_time)
-                .count() +
-            delay_time;
-
-        if (total_frame_time == 0) total_frame_time = 1;
-        uint64_t theoretical_fps = 1000000 / total_frame_time;
-
-        std::cout << "Processing time: " << processing_time << "us."
-                  << " Delay time: " << delay_time << "us."
-                  << " Total: " << total_frame_time << "us."
-                  << " Theoretical FPS: " << theoretical_fps;
-        if (theoretical_fps < _target_fps)
-        {
-            std::cout << " (FPS capped)";
-        }
-        std::cout << '\n';
     }
 }  // namespace ds::graphics

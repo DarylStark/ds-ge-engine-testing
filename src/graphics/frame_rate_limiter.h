@@ -22,6 +22,5 @@ namespace ds::graphics
         void start();
         void stop();
         virtual void delay();
-        void print_frame_time() const;
     };
 }  // namespace ds::graphics
